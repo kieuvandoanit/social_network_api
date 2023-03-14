@@ -20,24 +20,18 @@ class UserSeeder extends Seeder
                 "name"              => "Admin",
                 "email"             => "admin@gmail.com",
                 "password"          =>  Hash::make("admin"),
-                "department_id"     => 1,
-                "status_id"         => 1,
             ],
             [
                 "username"          => "kieuvandoan",
                 "name"              => "Kieu Van Doan",
                 "email"             => "kieuvandoan@gmail.com",
                 "password"          =>  Hash::make("12341234"),
-                "department_id"     => 1,
-                "status_id"         => 1,
             ],
             [
                 "username"          => "nguyenvana",
                 "name"              => "Nguyen Van A",
                 "email"             => "nguyenvana@gmail.com",
                 "password"          =>  Hash::make("12341234"),
-                "department_id"     => 1,
-                "status_id"         => 1,
             ],
         ]);
     }

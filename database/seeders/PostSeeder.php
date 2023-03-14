@@ -24,13 +24,13 @@ class PostSeeder extends Seeder
                 "title"         => "Bai viet thu 2",
                 "description"   => "Mo ta bai viet thu 2 ne. Toi rat yeu he thong",
                 "isPublic"      => true,
-                "user_id"       => 1
+                "user_id"       => 2
             ],
             [
                 "title"         => "Bai viet thu 3",
                 "description"   => "Mo ta bai viet thu 3 ne. Toi rat yeu he thong",
                 "isPublic"      => false,
-                "user_id"       => 1
+                "user_id"       => 2
             ],
         ]);
     }

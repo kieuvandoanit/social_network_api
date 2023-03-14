@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Transformers\PostTransformer;
 use Illuminate\Http\Request;
 use App\Http\CustomResponse\CustomJsonResponse;
+use App\Models\ReactionPost;
 use Validator;
 
 class PostController extends Controller
@@ -75,5 +76,31 @@ class PostController extends Controller
 
         $post->delete();
         return response()->noContent();
+    }
+
+    public function handleLike(Request $request) {
+        $post = Post::findOrFail($request->id);
+        $user = auth()->user();
+        $reaction_type = $request->reaction_type;
+
+        $liked = ReactionPost::where([
+            'post_id'   => $post->id,
+            'user_id'   => $user->id,
+        ])->first();
+
+        if ($liked && $liked->reaction_type === $reaction_type) {
+            $liked->delete();
+        } elseif ($liked && $liked->reaction_type !== $reaction_type) {
+            $liked->update([
+                'reaction_type' => $reaction_type
+            ]);
+        } else {
+            ReactionPost::create([
+                'post_id'       => $post->id,
+                'user_id'       => $user->id,
+                'reaction_type' => $reaction_type,
+            ]);
+        }
+        return response()->noContent()->status(200);
     }
 }

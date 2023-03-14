@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('content');
             $table->string('commentable_type');
             $table->bigInteger('commentable_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
