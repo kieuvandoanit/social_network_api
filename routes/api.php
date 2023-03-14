@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'middleware'    => 'api',
+    'middleware'    => 'auth.api.token',
     'prefix'        => 'auth'
 ], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
@@ -36,14 +36,14 @@ Route::group([
 });
 
 Route::group([
-    'middleware'    => 'api',
+    'middleware'    => 'auth.api.token',
 ], function ($route) {
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/user/{id}', [UserController::class, 'show']);
 });
 
 Route::group([
-    'middleware'    => 'api',
+    'middleware'    => 'auth.api.token',
     'prefix'        => 'posts'
 ], function ($route) {
     Route::get('', [PostController::class, 'index']);
@@ -53,4 +53,5 @@ Route::group([
     Route::delete('/{id}', [PostController::class, 'delete']);
     Route::post('/{id}/like', [PostController::class, 'handleLike']);
     Route::post('/{id}/comment', [CommentController::class, 'store']);
+    Route::delete('/{id}/comment/{commentId}', [CommentController::class, 'delete']);
 });
