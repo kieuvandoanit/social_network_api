@@ -54,4 +54,5 @@ Route::group([
     Route::post('/{id}/like', [PostController::class, 'handleLike']);
     Route::post('/{id}/comment', [CommentController::class, 'store']);
     Route::delete('/{id}/comment/{commentId}', [CommentController::class, 'delete']);
+    Route::get('/{id}/comments', [CommentController::class, 'getAllCommentInPost']);
 });

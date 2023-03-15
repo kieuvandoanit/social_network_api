@@ -9,6 +9,20 @@ use Validator;
 
 class CommentController extends Controller
 {
+
+    public function getAllCommentInPost(Request $request) {
+        $page = $request->page ?? 0;
+        $perPage = $request->perPage ?? 10;
+
+        $comments = Comments::selectRaw("COUNT(*) OVER() as total_record, comments.*")
+                    ->where('post_id', $request->id)
+                    ->skip($page*$perPage)
+                    ->take($perPage)
+                    ->get();
+        return normalResponse($comments, new CommentTranformer, $perPage, $page);
+
+    }
+
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
             "content"   => 'string|required'
